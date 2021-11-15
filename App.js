@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, FlatList, ScrollView, Alert} from 'react-native';
+import {StyleSheet, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import AddTodo from './components/AddTodo';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
@@ -40,30 +40,32 @@ export default function App() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo addTodo={addTodo} />
-        <View style={styles.list}>
-          {todos?.length == 0 ? (
-            <TodoItem
-              item={{
-                text: 'No todos to show',
-                key: Math?.random()?.toString(),
-              }}
-              onPressHandler={onPressHandler}
-            />
-          ) : (
-            <FlatList
-              data={todos}
-              renderItem={({item}) => (
-                <TodoItem item={item} onPressHandler={onPressHandler} />
-              )}
-            />
-          )}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo addTodo={addTodo} />
+          <View style={styles.list}>
+            {todos?.length == 0 ? (
+              <TodoItem
+                item={{
+                  text: 'No todos to show',
+                  key: Math?.random()?.toString(),
+                }}
+                onPressHandler={onPressHandler}
+              />
+            ) : (
+              <FlatList
+                data={todos}
+                renderItem={({item}) => (
+                  <TodoItem item={item} onPressHandler={onPressHandler} />
+                )}
+              />
+            )}
+          </View>
         </View>
       </View>
-    </ScrollView>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
