@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, FlatList, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, FlatList, ScrollView, Alert} from 'react-native';
 import AddTodo from './components/AddTodo';
 import Header from './components/Header';
 import TodoItem from './components/TodoItem';
@@ -22,9 +22,21 @@ export default function App() {
 
   const addTodo = text => {
     // console.log(text)
-    setTodos(prevTodos => {
-      return [...prevTodos, {text: text, key: Math.random().toString()}];
-    });
+
+    if (text.length > 3) {
+      
+      setTodos(prevTodos => {
+        return [...prevTodos, {text: text, key: Math.random().toString()}];
+      });
+    } else {
+      // 1st para >> title
+      // 2nd para >> text
+      // 3rd para >> array of objects and each object represents a button
+      Alert.alert("OOPS!", "Todos must be over 2 chars long",[
+        {text: "Understood", onPress:() => console.log("alert closed")}
+      ]
+      )
+    }
   };
 
   return (
