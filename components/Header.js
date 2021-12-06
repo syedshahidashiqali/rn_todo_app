@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 function Header() {
     return (
         <View style={styles.header}>
-            <Text style={styles.title}>MY TODOS</Text>
+            <Text style={styles.title}>Todo App by Shahid</Text>
         </View>
     )
 }
